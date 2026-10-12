@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como ver a temperatura da CPU no Windows 11 (e 10): 4 jeitos | Pulso</title>
+  <meta name="description" content="O Windows 11 não mostra a temperatura do processador. Veja 4 formas de conferir a temperatura da CPU e da GPU: Gerenciador de Tarefas, BIOS, PowerShell e um widget gratuito sempre na tela.">
+  <link rel="canonical" href="https://ferbdev.github.io/pulso/guias/temperatura-cpu-windows-11/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#eef2f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pulso">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://ferbdev.github.io/pulso/guias/temperatura-cpu-windows-11/">
+  <meta property="og:title" content="Como ver a temperatura da CPU no Windows 11">
+  <meta property="og:description" content="4 formas de conferir a temperatura do processador e da placa de vídeo no Windows 11 e 10.">
+  <meta property="og:image" content="https://ferbdev.github.io/pulso/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Como ver a temperatura da CPU no Windows 11 (e 10)",
+    "description": "Quatro formas de conferir a temperatura do processador e da placa de vídeo no Windows 11 e 10.",
+    "inLanguage": "pt-BR",
+    "datePublished": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "author": { "@type": "Person", "name": "ferbdev", "url": "https://github.com/ferbdev" },
+    "publisher": { "@type": "Organization", "name": "Pulso", "logo": { "@type": "ImageObject", "url": "https://ferbdev.github.io/pulso/assets/og.png" } },
+    "image": "https://ferbdev.github.io/pulso/assets/og.png",
+    "mainEntityOfPage": "https://ferbdev.github.io/pulso/guias/temperatura-cpu-windows-11/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pulso", "item": "https://ferbdev.github.io/pulso/" },
+      { "@type": "ListItem", "position": 2, "name": "Como ver a temperatura da CPU no Windows 11", "item": "https://ferbdev.github.io/pulso/guias/temperatura-cpu-windows-11/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O Windows 11 mostra a temperatura da CPU?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Não. O Gerenciador de Tarefas do Windows 11 mostra a temperatura da GPU dedicada, mas não a do processador. Para ver a temperatura da CPU é preciso entrar na BIOS ou usar um programa como o Pulso, o HWMonitor ou o LibreHardwareMonitor." }
+      },
+      {
+        "@type": "Question",
+        "name": "Por que programas de temperatura pedem administrador?",
+        "acceptedAnswer": { "@type": "Answer", "text": "O sensor de temperatura fica dentro do processador e só pode ser lido com acesso de baixo nível ao hardware, o que no Windows exige permissão de administrador e um driver." }
+      },
+      {
+        "@type": "Question",
+        "name": "O comando do PowerShell mostra a temperatura real da CPU?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nem sempre. A classe MSAcpi_ThermalZoneTemperature lê uma zona térmica do ACPI definida pelo fabricante, que muitas vezes não é o sensor do processador, fica parada no mesmo valor ou nem existe no PC." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <nav class="nav glass" aria-label="Principal">
+    <a class="brand" href="../../" aria-label="Pulso, página inicial">
+      <img src="../../assets/favicon.svg" alt="" width="28" height="28">
+      Pulso
+    </a>
+    <ul class="nav-links">
+      <li class="keep"><a href="../../">Baixar o Pulso</a></li>
+    </ul>
+  </nav>
+
+  <main class="container policy">
+    <article class="glass policy-card">
+      <h1>Como ver a temperatura da CPU no Windows 11 (e 10)</h1>
+      <p>
+        O Windows tem um monitor de desempenho completo no Gerenciador de Tarefas, mas <strong>não mostra a temperatura
+        do processador</strong>. Abaixo estão quatro formas de conferir, da mais rápida à mais completa. Todas funcionam
+        no Windows 11 e no Windows 10.
+      </p>
+
+      <h2>1. Gerenciador de Tarefas (só a GPU)</h2>
+      <p>
+        Pressione <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd>, abra a aba <strong>Desempenho</strong> e clique na sua
+        placa de vídeo (GPU). A temperatura aparece embaixo do gráfico. Isso funciona com placas de vídeo dedicadas e drivers
+        atualizados. A temperatura da CPU, porém, não aparece em lugar nenhum do Gerenciador de Tarefas.
+      </p>
+
+      <h2>2. BIOS ou UEFI</h2>
+      <p>
+        Reinicie o PC e pressione a tecla de configuração logo ao ligar (geralmente <kbd>Del</kbd>, <kbd>F2</kbd> ou
+        <kbd>F10</kbd>, conforme o fabricante). A maioria das placas-mãe mostra a temperatura da CPU na tela inicial ou na
+        seção de monitoramento (“PC Health”, “Hardware Monitor”). A limitação é que você só vê a temperatura com o
+        computador parado na BIOS, nunca enquanto joga ou trabalha.
+      </p>
+
+      <h2>3. PowerShell</h2>
+      <p>Abra o PowerShell como administrador e rode:</p>
+      <p><code>Get-CimInstance -Namespace root/wmi -ClassName MSAcpi_ThermalZoneTemperature | ForEach-Object { $_.CurrentTemperature / 10 - 273.15 }</code></p>
+      <p>
+        O resultado vem em graus Celsius, mas use com cautela: esse comando lê uma “zona térmica” definida pelo fabricante,
+        que muitas vezes <strong>não é o sensor do processador</strong>, fica parada no mesmo valor ou simplesmente não existe
+        no seu PC (o comando então dá erro).
+      </p>
+
+      <h2>4. Um monitor de temperatura (o jeito mais confiável)</h2>
+      <p>
+        Programas de monitoramento leem os sensores internos do processador, da placa de vídeo e dos discos, em tempo real.
+        As opções gratuitas mais conhecidas são:
+      </p>
+      <ul>
+        <li><strong>Pulso</strong>: widget flutuante que fica sempre à vista, com temperatura e uso de CPU, GPU, RAM e discos. Portátil (um único arquivo) e open source.</li>
+        <li><strong>HWMonitor</strong>: janela com a lista completa de sensores, incluindo voltagens e ventoinhas.</li>
+        <li><strong>LibreHardwareMonitor</strong>: open source, também com todos os sensores. O Pulso usa a biblioteca dele por baixo.</li>
+      </ul>
+
+      <h3>Com o Pulso, em três passos</h3>
+      <ol>
+        <li>Baixe o <code>Pulso.exe</code> na página inicial. Não precisa instalar.</li>
+        <li>Abra o arquivo e confirme a permissão de administrador. Ela é necessária porque o sensor fica dentro do processador.</li>
+        <li>Se o widget pedir, clique em <strong>Instalar driver</strong>. A temperatura da CPU aparece em seguida, com cor verde, amarela ou vermelha conforme a faixa.</li>
+      </ol>
+      <div class="cta" style="margin: 20px 0 8px;">
+        <a class="btn btn-primary" href="https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe" data-action="download">Baixar Pulso.exe</a>
+        <a class="btn btn-ghost" href="../temperatura-ideal-cpu-gpu/">Qual é a temperatura ideal?</a>
+      </div>
+
+      <h2>Perguntas frequentes</h2>
+      <h3>O Windows 11 mostra a temperatura da CPU?</h3>
+      <p>Não. Ele mostra a da GPU dedicada no Gerenciador de Tarefas, mas a do processador só aparece na BIOS ou em programas de monitoramento.</p>
+      <h3>Por que esses programas pedem administrador?</h3>
+      <p>O sensor fica dentro do processador e só pode ser lido com acesso de baixo nível ao hardware, o que no Windows exige permissão de administrador e um driver.</p>
+      <h3>Qual temperatura é normal?</h3>
+      <p>Depende do processador e da carga. Veja a tabela completa no guia <a href="../temperatura-ideal-cpu-gpu/">temperatura ideal de CPU e GPU</a>.</p>
+
+      <p style="margin-top: 28px;">Atualizado em outubro de 2026.</p>
+    </article>
+  </main>
+
+  <footer class="container">
+    <div class="row">
+      <span>© 2026 Pulso · <a href="../../">Página inicial</a></span>
+      <span><a href="../temperatura-ideal-cpu-gpu/">Temperatura ideal</a> · <a href="../alternativa-hwmonitor/">Alternativa ao HWMonitor</a></span>
+    </div>
+  </footer>
+
+  <script src="../../assets/app.js" defer></script>
+</body>
+</html>

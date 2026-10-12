@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temperatura ideal da CPU e da GPU: tabela e quando se preocupar | Pulso</title>
+  <meta name="description" content="Qual a temperatura normal do processador, da placa de vídeo e do SSD? Tabela com faixas em repouso e em carga, limites de cada componente e dicas para baixar a temperatura do PC.">
+  <link rel="canonical" href="https://ferbdev.github.io/pulso/guias/temperatura-ideal-cpu-gpu/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#eef2f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pulso">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://ferbdev.github.io/pulso/guias/temperatura-ideal-cpu-gpu/">
+  <meta property="og:title" content="Temperatura ideal da CPU e da GPU">
+  <meta property="og:description" content="Tabela de temperaturas normais de processador, placa de vídeo e discos, e quando se preocupar.">
+  <meta property="og:image" content="https://ferbdev.github.io/pulso/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Temperatura ideal da CPU e da GPU: tabela e quando se preocupar",
+    "description": "Faixas de temperatura normais para processador, placa de vídeo e discos, limites e dicas para reduzir a temperatura.",
+    "inLanguage": "pt-BR",
+    "datePublished": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "author": { "@type": "Person", "name": "ferbdev", "url": "https://github.com/ferbdev" },
+    "publisher": { "@type": "Organization", "name": "Pulso", "logo": { "@type": "ImageObject", "url": "https://ferbdev.github.io/pulso/assets/og.png" } },
+    "image": "https://ferbdev.github.io/pulso/assets/og.png",
+    "mainEntityOfPage": "https://ferbdev.github.io/pulso/guias/temperatura-ideal-cpu-gpu/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pulso", "item": "https://ferbdev.github.io/pulso/" },
+      { "@type": "ListItem", "position": 2, "name": "Temperatura ideal da CPU e da GPU", "item": "https://ferbdev.github.io/pulso/guias/temperatura-ideal-cpu-gpu/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <nav class="nav glass" aria-label="Principal">
+    <a class="brand" href="../../" aria-label="Pulso, página inicial">
+      <img src="../../assets/favicon.svg" alt="" width="28" height="28">
+      Pulso
+    </a>
+    <ul class="nav-links">
+      <li class="keep"><a href="../../">Baixar o Pulso</a></li>
+    </ul>
+  </nav>
+
+  <main class="container policy">
+    <article class="glass policy-card">
+      <h1>Temperatura ideal da CPU e da GPU</h1>
+      <p>
+        Não existe um número único: cada componente tem um limite, e a temperatura sobe naturalmente quando você joga,
+        renderiza vídeo ou compila código. O que importa é a <strong>faixa</strong> em que ela fica e se ela chega perto do
+        limite com frequência. Os valores abaixo são referências gerais para PCs de mesa. Notebooks costumam trabalhar mais
+        quentes, e o limite exato do seu modelo está na página do fabricante.
+      </p>
+
+      <h2>Tabela de referência</h2>
+      <div class="compat glass">
+        <table>
+          <caption class="sr-only">Faixas de temperatura de referência por componente</caption>
+          <thead>
+            <tr><th scope="col">Componente</th><th scope="col">Em repouso</th><th scope="col">Em uso pesado</th><th scope="col">Atenção a partir de</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Processador (CPU) de desktop</td><td>30–50 °C</td><td>60–80 °C</td><td>85 °C</td></tr>
+            <tr><td>Processador de notebook</td><td>40–60 °C</td><td>70–90 °C</td><td>95 °C</td></tr>
+            <tr><td>Placa de vídeo (GPU)</td><td>30–45 °C</td><td>65–80 °C</td><td>85 °C</td></tr>
+            <tr><td>SSD NVMe</td><td>30–50 °C</td><td>50–70 °C</td><td>70 °C</td></tr>
+            <tr><td>HD (disco rígido)</td><td>25–40 °C</td><td>35–45 °C</td><td>50 °C</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Qual é o limite de cada um?</h2>
+      <ul>
+        <li><strong>CPUs Intel</strong> costumam ter limite (TjMax) em torno de <strong>100 °C</strong>. Ao chegar perto, o processador reduz o clock sozinho para se proteger (o chamado <em>thermal throttling</em>), e o desempenho cai.</li>
+        <li><strong>CPUs AMD Ryzen</strong> recentes têm limite em torno de <strong>95 °C</strong>, e alguns modelos foram projetados para trabalhar perto dele em carga máxima. Nesse caso, 90 °C em uso pesado não é defeito.</li>
+        <li><strong>Placas de vídeo</strong> também reduzem o clock perto do limite do modelo, geralmente entre 83 e 95 °C. O “hot spot” (ponto mais quente do chip) fica normalmente de 10 a 20 °C acima da temperatura principal.</li>
+        <li><strong>SSDs NVMe</strong> diminuem a velocidade quando passam de cerca de 70 °C. Um dissipador simples já resolve na maioria dos casos.</li>
+      </ul>
+
+      <h2>Quando se preocupar</h2>
+      <ul>
+        <li>A CPU passa de 85 °C em tarefas leves, como navegar ou assistir vídeos.</li>
+        <li>A temperatura em repouso subiu muito em relação ao que era antes.</li>
+        <li>O PC fica lento, trava ou desliga sozinho durante jogos.</li>
+        <li>As ventoinhas ficam no máximo o tempo todo.</li>
+      </ul>
+
+      <h2>Como baixar a temperatura</h2>
+      <ol>
+        <li><strong>Limpe a poeira</strong> das ventoinhas, do dissipador e dos filtros do gabinete.</li>
+        <li><strong>Troque a pasta térmica</strong> do processador se ela tiver mais de alguns anos.</li>
+        <li><strong>Melhore o fluxo de ar</strong>: entrada de ar frio na frente, saída atrás e em cima, cabos organizados.</li>
+        <li>Em notebooks, use-o sobre uma superfície dura e, se possível, com um suporte que eleve a parte de trás.</li>
+        <li>Confira se algum programa está usando a CPU sem necessidade (Gerenciador de Tarefas → Processos).</li>
+      </ol>
+
+      <h2>Acompanhe sem abrir janelas</h2>
+      <p>
+        O <a href="../../">Pulso</a> mostra a temperatura e o uso da CPU, GPU, RAM e discos num widget sempre visível. As cores
+        seguem faixas parecidas com as desta tabela: verde, amarelo e vermelho. Você percebe o aquecimento na hora, sem precisar
+        abrir nada.
+      </p>
+      <div class="cta" style="margin: 20px 0 8px;">
+        <a class="btn btn-primary" href="https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe" data-action="download">Baixar Pulso.exe</a>
+        <a class="btn btn-ghost" href="../temperatura-cpu-windows-11/">Como ver a temperatura no Windows</a>
+      </div>
+
+      <p style="margin-top: 28px;">Atualizado em outubro de 2026. Valores de referência; consulte as especificações do fabricante do seu modelo.</p>
+    </article>
+  </main>
+
+  <footer class="container">
+    <div class="row">
+      <span>© 2026 Pulso · <a href="../../">Página inicial</a></span>
+      <span><a href="../temperatura-cpu-windows-11/">Temperatura no Windows 11</a> · <a href="../alternativa-hwmonitor/">Alternativa ao HWMonitor</a></span>
+    </div>
+  </footer>
+
+  <script src="../../assets/app.js" defer></script>
+</body>
+</html>
