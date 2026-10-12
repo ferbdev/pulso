@@ -97,6 +97,8 @@ git push origin v0.1.0
 
 O workflow **Release** compila o `Pulso.exe` e o publica no GitHub Releases junto com o SHA-256. O link `releases/latest/download/Pulso.exe`, usado pelo site, passa a apontar para a nova versão.
 
-## Créditos
+## Licença
 
-A leitura dos sensores é feita com o [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) (MPL-2.0), e a temperatura da CPU depende do driver [PawnIO](https://pawnio.eu/).
+[MIT](LICENSE) © 2026 ferbdev
+
+A leitura dos sensores é feita com o [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor), que tem licença própria (MPL-2.0), e a temperatura da CPU depende do driver [PawnIO](https://pawnio.eu/).
