@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>Pulso</AssemblyName>
     <Product>Pulso</Product>
-    <Version>0.2.0</Version>
+    <Version>0.2.2</Version>
     <AssemblyTitle>Pulso: monitor de hardware</AssemblyTitle>
     <Description>Pulso: monitor de hardware</Description>
     <Company>ferbdev</Company>

@@ -13,6 +13,9 @@ public interface IHardwareMonitorService : IDisposable
     /// <summary>Atualiza os sensores e devolve a leitura atual. Thread-safe.</summary>
     HardwareSnapshot GetSnapshot();
 
+    /// <summary>Relatório em texto de todo o hardware e sensores detectados (diagnóstico).</summary>
+    string GetReport();
+
     bool IsElevated { get; }
 
     bool IsDriverInstalled { get; }

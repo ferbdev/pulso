@@ -122,6 +122,20 @@ public sealed class HardwareMonitorService : IHardwareMonitorService
         }
     }
 
+    public string GetReport()
+    {
+        lock (_sync)
+        {
+            if (_computer == null || _disposed)
+            {
+                return "Sensores indisponíveis.";
+            }
+
+            _computer.Accept(_visitor);
+            return _computer.GetReport();
+        }
+    }
+
     public void Dispose()
     {
         lock (_sync)
@@ -192,14 +206,27 @@ public sealed class HardwareMonitorService : IHardwareMonitorService
     private static DiskInfo ReadDisk(IHardware disk)
     {
         var sensors = AllSensors(disk).ToList();
-        var temperature = Find(sensors, SensorType.Temperature, "Temperature", "Composite Temperature")
+
+        // Preferência: temperatura composta (a "temperatura do SSD"), depois o primeiro sensor interno.
+        // "Warning/Critical Temperature" também são do tipo Temperature, mas são limites fixos de fábrica
+        // (ex.: 69,85 °C no Samsung 970) e nunca podem ser exibidos como leitura.
+        var temperature = Positive(Find(sensors, SensorType.Temperature, "Temperature", "Composite Temperature", "Temperature #1"))
             ?? sensors
-                .Where(s => s.SensorType == SensorType.Temperature)
-                .Select(s => Valid(s.Value))
+                .Where(s => s.SensorType == SensorType.Temperature && !IsThresholdSensor(s.Name))
+                .Select(s => Positive(Valid(s.Value)))
                 .FirstOrDefault(v => v.HasValue);
 
         return new DiskInfo(disk.Name, Find(sensors, SensorType.Load, "Used Space"), temperature);
     }
+
+    private static bool IsThresholdSensor(string name) =>
+        name.Contains("Warning", StringComparison.OrdinalIgnoreCase)
+        || name.Contains("Critical", StringComparison.OrdinalIgnoreCase)
+        || name.Contains("Threshold", StringComparison.OrdinalIgnoreCase)
+        || name.Contains("Limit", StringComparison.OrdinalIgnoreCase);
+
+    // Alguns discos reportam 0 quando o sensor não existe.
+    private static double? Positive(double? value) => value > 0 ? value : null;
 
     private static MemoryInfo ReadMemory()
     {
