@@ -8,7 +8,15 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>Pulso</AssemblyName>
     <Product>Pulso</Product>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
+    <AssemblyTitle>Pulso: monitor de hardware</AssemblyTitle>
+    <Description>Pulso: monitor de hardware</Description>
+    <Company>ferbdev</Company>
+    <Authors>ferbdev</Authors>
+    <Copyright>© 2026 ferbdev</Copyright>
+    <ApplicationIcon>Assets\Pulso.ico</ApplicationIcon>
+    <!-- Versão limpa ("0.2.0") nos metadados, sem o hash do commit; o SignPath confere esse campo. -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <!-- Release pede elevação (necessária para ler temperatura da CPU).
@@ -20,6 +28,10 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Pulso.ico" />
   </ItemGroup>
 
 </Project>

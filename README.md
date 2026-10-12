@@ -33,7 +33,7 @@
 
 1. Baixe o [`Pulso.exe`](https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe) e abra.
 2. Confirme a permissão de administrador. Ela é necessária para ler a temperatura da CPU.
-3. Se o SmartScreen mostrar “O Windows protegeu o computador”, clique em **Mais informações → Executar assim mesmo**. Esse aviso aparece porque o executável ainda não tem assinatura digital.
+3. Se o SmartScreen mostrar “O Windows protegeu o computador”, clique em **Mais informações → Executar assim mesmo**. Esse aviso aparece porque o executável ainda não tem assinatura digital (veja [Assinatura de código](#assinatura-de-código)).
 
 | Informação | Sem admin | Admin + driver PawnIO |
 |---|:---:|:---:|
@@ -96,6 +96,14 @@ git push origin v0.1.0
 ```
 
 O workflow **Release** compila o `Pulso.exe` e o publica no GitHub Releases junto com o SHA-256. O link `releases/latest/download/Pulso.exe`, usado pelo site, passa a apontar para a nova versão.
+
+## Assinatura de código
+
+O projeto está em processo de candidatura ao [SignPath Foundation](https://signpath.org/), que assina gratuitamente projetos open source. Enquanto a assinatura não estiver ativa, o Windows mostra o aviso do SmartScreen na primeira execução.
+
+Quando a assinatura for aprovada, o workflow **Release** passa a assinar o `Pulso.exe` sozinho. Para isso, ele precisa do secret `SIGNPATH_API_TOKEN` e das variáveis `SIGNPATH_ORGANIZATION_ID`, `SIGNPATH_PROJECT_SLUG` e `SIGNPATH_SIGNING_POLICY_SLUG` no repositório. Sem essa configuração, a release continua saindo sem assinatura.
+
+Veja a [política de assinatura de código](https://ferbdev.github.io/pulso/code-signing/).
 
 ## Licença
 

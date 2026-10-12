@@ -394,6 +394,135 @@ footer a { color: var(--muted); }
   border: 0;
 }
 
+/* Guia pós-download: seta para a área de downloads do navegador (canto superior direito) */
+.download-guide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 30;
+  width: min(400px, 100%);
+  padding: 8px 16px 16px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+.download-guide.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.guide-arrow {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 24px;
+  color: var(--accent);
+}
+.guide-arrow svg {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 4px 12px color-mix(in srgb, var(--accent) 45%, transparent));
+  animation: nudge 1.2s ease-in-out infinite;
+}
+.guide-panel {
+  position: relative;
+  margin-top: 4px;
+  padding: 20px 20px 18px;
+  max-height: calc(100vh - 80px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--glass-strong);
+  pointer-events: auto;
+}
+.guide-panel h4 { margin: 0 32px 10px 0; font-size: 1.08rem; }
+.guide-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.guide-notice {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-size: 0.92rem;
+}
+.guide-steps {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 12px;
+  font-size: 0.94rem;
+}
+.guide-steps li::marker { color: var(--accent); font-weight: 700; }
+.guide-hint {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--glass-border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--glass);
+  font-family: inherit;
+  font-size: 0.82em;
+}
+/* Miniatura do aviso do SmartScreen, com "Mais informações" em destaque */
+.smartscreen-mock {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #0b5ba8;
+  color: #fff;
+  font-size: 0.82rem;
+}
+.ss-title { font-size: 0.98rem; }
+.ss-more {
+  justify-self: start;
+  padding: 0 4px;
+  border-radius: 4px;
+  text-decoration: underline;
+  outline: 2px solid #facc15;
+  outline-offset: 2px;
+  animation: highlight 1.6s ease-in-out infinite;
+}
+.ss-run {
+  justify-self: end;
+  padding: 4px 12px;
+  border: 2px solid #facc15;
+  background: #fff;
+  color: #0b0e14;
+  font-weight: 600;
+}
+.guide-next { margin: 14px 0 0; color: var(--muted); font-size: 0.88rem; }
+.guide-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.guide-actions .btn { padding: 10px 16px; font-size: 0.92rem; }
+
+/* Página da política de assinatura de código */
+.policy { display: grid; gap: 20px; padding-top: 40px; padding-bottom: 24px; }
+.policy-card { padding: 28px clamp(20px, 4vw, 40px); }
+.policy-card h1, .policy-card .policy-title { margin: 0 0 12px; font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -0.02em; }
+.policy-card h2, .policy-card h3 { margin: 24px 0 8px; font-size: 1.15rem; }
+.policy-card p, .policy-card li { color: var(--muted); }
+.policy-card strong { color: var(--text); }
+.policy-attribution { padding: 10px 14px; border-radius: 12px; background: color-mix(in srgb, var(--accent-2) 12%, transparent); }
+
+@keyframes nudge { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -6px); } }
+@keyframes highlight { 0%, 100% { outline-color: #facc15; } 50% { outline-color: transparent; } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes trace { 0% { stroke-dashoffset: 900; } 60%, 100% { stroke-dashoffset: 0; } }
 @keyframes beat {

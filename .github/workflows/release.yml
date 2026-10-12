@@ -1,20 +1,25 @@
 name: Release
 
-# Publica o Pulso.exe portátil no GitHub Releases a cada tag de versão (ex.: v0.1.0).
+# Publica o Pulso.exe portátil no GitHub Releases a cada tag de versão (ex.: v0.2.0).
+# Se o SignPath estiver configurado (secret SIGNPATH_API_TOKEN + variáveis SIGNPATH_*), o .exe é assinado
+# antes de ser publicado; sem essa configuração, a release sai sem assinatura.
 on:
   push:
     tags: ["v*"]
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   release:
     runs-on: windows-latest
+    env:
+      SIGNING_ENABLED: ${{ secrets.SIGNPATH_API_TOKEN != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 
@@ -26,6 +31,38 @@ jobs:
             -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true `
             -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none `
             -p:Version=$version -o publish
+
+      - name: Enviar executável para assinatura
+        id: upload-unsigned
+        if: env.SIGNING_ENABLED == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          path: publish/Pulso.exe
+          archive: false
+
+      - name: Assinar com SignPath
+        if: env.SIGNING_ENABLED == 'true'
+        uses: signpath/github-action-submit-signing-request@v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          github-artifact-id: ${{ steps.upload-unsigned.outputs.artifact-id }}
+          skip-decompress: true
+          wait-for-completion: true
+          # Cada assinatura precisa de aprovação manual no painel do SignPath.
+          wait-for-completion-timeout-in-seconds: 3600
+          output-artifact-directory: signed
+
+      - name: Usar executável assinado
+        if: env.SIGNING_ENABLED == 'true'
+        shell: pwsh
+        run: Copy-Item signed/Pulso.exe publish/Pulso.exe -Force
+
+      - name: Calcular SHA-256
+        shell: pwsh
+        run: |
           (Get-FileHash publish/Pulso.exe -Algorithm SHA256).Hash.ToLower() + "  Pulso.exe" |
             Set-Content publish/Pulso.exe.sha256 -Encoding ascii
 
@@ -34,5 +71,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          $notes = "Baixe o **Pulso.exe** abaixo, um único arquivo e sem instalação. " +
+            "[Política de assinatura de código / Code signing policy](https://ferbdev.github.io/pulso/code-signing/)"
           gh release create "${{ github.ref_name }}" publish/Pulso.exe publish/Pulso.exe.sha256 `
-            --title "Pulso ${{ github.ref_name }}" --generate-notes
+            --title "Pulso ${{ github.ref_name }}" --notes $notes --generate-notes
