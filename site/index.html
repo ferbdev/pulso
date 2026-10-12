@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulso: monitor de temperatura de CPU e GPU para Windows (grátis)</title>
+  <meta name="description" content="Pulso é um widget gratuito e open source para Windows 10 e 11 que mostra temperatura e uso da CPU, GPU, memória RAM e discos em tempo real. Portátil: um único .exe, sem instalação.">
+  <meta name="keywords" content="monitor de temperatura cpu, temperatura gpu, widget windows, monitor de hardware, uso de cpu, uso de memória, portable, grátis, open source">
+  <meta name="theme-color" content="#eef2f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://ferbdev.github.io/pulso/">
+  <link rel="alternate" hreflang="pt-BR" href="https://ferbdev.github.io/pulso/">
+  <link rel="alternate" hreflang="en" href="https://ferbdev.github.io/pulso/en/">
+  <link rel="alternate" hreflang="x-default" href="https://ferbdev.github.io/pulso/en/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pulso">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://ferbdev.github.io/pulso/">
+  <meta property="og:title" content="Pulso: os sinais vitais do seu PC, sempre à vista">
+  <meta property="og:description" content="Widget gratuito para Windows com temperatura e uso de CPU, GPU, RAM e discos em tempo real. Um único .exe, sem instalação.">
+  <meta property="og:image" content="https://ferbdev.github.io/pulso/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Widget Pulso mostrando temperatura e uso de CPU, GPU e memória">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pulso",
+    "description": "Widget de monitoramento de hardware para Windows: temperatura e uso de CPU, GPU, memória RAM e discos em tempo real.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "url": "https://ferbdev.github.io/pulso/",
+    "downloadUrl": "https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe",
+    "screenshot": "https://ferbdev.github.io/pulso/assets/widget.png",
+    "image": "https://ferbdev.github.io/pulso/assets/og.png",
+    "inLanguage": ["pt-BR", "en"],
+    "isAccessibleForFree": true,
+    "license": "https://github.com/ferbdev/pulso",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+    "author": { "@type": "Person", "name": "ferbdev", "url": "https://github.com/ferbdev" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Preciso instalar o Pulso?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Não. O Pulso é um único arquivo Pulso.exe com tudo embutido. Basta baixar e abrir." }
+      },
+      {
+        "@type": "Question",
+        "name": "Por que o Pulso pede permissão de administrador?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A temperatura e o clock da CPU só podem ser lidos com acesso de administrador e o driver PawnIO, o mesmo usado pelo LibreHardwareMonitor. O próprio Pulso oferece instalar o driver com um clique." }
+      },
+      {
+        "@type": "Question",
+        "name": "O Windows mostrou “O Windows protegeu o computador”. É seguro?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Esse aviso do SmartScreen aparece para programas novos ainda sem assinatura digital. O código do Pulso é aberto no GitHub e o executável é gerado automaticamente a partir dele. Clique em Mais informações e depois em Executar assim mesmo." }
+      },
+      {
+        "@type": "Question",
+        "name": "Funciona com processadores AMD e placas Radeon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sim. O Pulso usa a biblioteca LibreHardwareMonitor, que suporta CPUs Intel e AMD e GPUs NVIDIA, AMD Radeon e Intel." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <nav class="nav glass" aria-label="Principal">
+    <a class="brand" href="./" aria-label="Pulso, página inicial">
+      <img src="assets/favicon.svg" alt="" width="28" height="28">
+      Pulso
+    </a>
+    <ul class="nav-links">
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#faq">Dúvidas</a></li>
+      <li><a href="https://github.com/ferbdev/pulso" rel="noopener">GitHub</a></li>
+      <li class="keep"><a class="lang" href="en/" hreflang="en" lang="en">EN</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="eyebrow glass"><span class="dot" aria-hidden="true"></span>Grátis · Open source · Windows 10 e 11</span>
+        <h1>Os sinais vitais do seu PC, <span class="grad">sempre à vista.</span></h1>
+        <p class="lead">
+          Pulso é um widget leve que mostra a temperatura e o uso da CPU, GPU, memória RAM e discos em tempo real,
+          flutuando sobre a sua área de trabalho. Sem instalação: um único arquivo e pronto.
+        </p>
+        <div class="cta">
+          <button class="btn btn-primary" type="button" data-action="open">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM11.5 4.4 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.4z"/></svg>
+            Abrir widget no Windows
+          </button>
+          <a class="btn btn-ghost" href="https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe" data-action="download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            Baixar Pulso.exe
+          </a>
+        </div>
+        <p class="meta" data-platform-note>Portátil · 64 MB · não precisa instalar nada</p>
+      </div>
+
+      <div class="showcase">
+        <svg class="pulse-line" viewBox="0 0 600 80" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 40h180l20-28 26 56 24-46 18 18h332"/>
+        </svg>
+        <img src="assets/widget.png" alt="Widget Pulso mostrando temperatura e uso de CPU e GPU, VRAM, memória RAM e discos" width="540" height="769" fetchpriority="high">
+      </div>
+    </section>
+
+    <section id="recursos" aria-labelledby="recursos-titulo">
+      <h2 class="section-title" id="recursos-titulo">Tudo o que importa, num relance</h2>
+      <p class="section-sub">Sem janelas cheias de gráficos: só os números que dizem se o seu PC está bem.</p>
+      <ul class="features">
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+          <h3>Temperatura em tempo real</h3>
+          <p>CPU, GPU e discos com cores por faixa: verde, amarelo e vermelho. Você percebe o superaquecimento antes que ele vire problema.</p>
+        </li>
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></div>
+          <h3>CPU, GPU, RAM e discos</h3>
+          <p>Uso, clock, VRAM e espaço em disco. Suporta Intel, AMD e NVIDIA.</p>
+        </li>
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <h3>Portátil de verdade</h3>
+          <p>Um único Pulso.exe com tudo embutido. Leve num pendrive, rode e apague quando quiser.</p>
+        </li>
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg></div>
+          <h3>Flutuante e discreto</h3>
+          <p>Arraste para qualquer canto, deixe sempre no topo e ajuste a opacidade e a frequência de atualização.</p>
+        </li>
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+          <h3>Driver em um clique</h3>
+          <p>Falta o driver para ler a temperatura da CPU? O Pulso instala o PawnIO pelo winget com um clique.</p>
+        </li>
+        <li class="feature glass">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+          <h3>Open source</h3>
+          <p>Código aberto no GitHub, feito com .NET e LibreHardwareMonitor. Sem anúncios e sem coleta de dados.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="como-funciona" aria-labelledby="como-titulo">
+      <h2 class="section-title" id="como-titulo">Como funciona</h2>
+      <p class="section-sub">Do clique ao widget na tela em menos de um minuto.</p>
+      <ol class="steps">
+        <li class="step glass">
+          <h3>Clique em “Abrir widget”</h3>
+          <p>Na primeira vez, o navegador baixa o Pulso.exe automaticamente.</p>
+        </li>
+        <li class="step glass">
+          <h3>Abra o arquivo</h3>
+          <p>Confirme a permissão de administrador. O widget aparece no canto da tela.</p>
+        </li>
+        <li class="step glass">
+          <h3>Pronto, das próximas vezes também</h3>
+          <p>O Pulso se registra no Windows: o botão desta página passa a abrir o widget direto.</p>
+        </li>
+      </ol>
+
+      <div class="compat glass">
+        <table>
+          <caption class="sr-only">O que o Pulso mostra com e sem permissão de administrador</caption>
+          <thead>
+            <tr><th scope="col">Informação</th><th scope="col">Sem admin</th><th scope="col">Admin + driver PawnIO</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Uso de CPU e memória RAM</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>GPU: uso, temperatura e VRAM</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>Temperatura e clock da CPU</td><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><td>Discos: espaço e temperatura</td><td class="no">—</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-titulo">
+      <h2 class="section-title" id="faq-titulo">Dúvidas frequentes</h2>
+      <div class="faq">
+        <details class="glass">
+          <summary>Preciso instalar o Pulso?</summary>
+          <p>Não. O Pulso é um único arquivo <code>Pulso.exe</code> com tudo embutido, inclusive o .NET. Basta baixar e abrir.</p>
+        </details>
+        <details class="glass">
+          <summary>Por que ele pede permissão de administrador?</summary>
+          <p>A temperatura e o clock da CPU só podem ser lidos com acesso de administrador e o driver PawnIO, o mesmo usado pelo LibreHardwareMonitor. Se o driver não estiver instalado, o próprio Pulso oferece instalar com um clique.</p>
+        </details>
+        <details class="glass">
+          <summary>O Windows mostrou “O Windows protegeu o computador”. É seguro?</summary>
+          <p>Esse aviso do SmartScreen aparece para programas novos que ainda não têm assinatura digital. O código do Pulso é aberto e o executável é gerado automaticamente no GitHub a partir dele. Clique em <strong>Mais informações → Executar assim mesmo</strong>.</p>
+        </details>
+        <details class="glass">
+          <summary>Funciona com AMD Ryzen e placas Radeon?</summary>
+          <p>Sim. O Pulso usa o LibreHardwareMonitor, que suporta CPUs Intel e AMD e GPUs NVIDIA, AMD Radeon e Intel.</p>
+        </details>
+        <details class="glass">
+          <summary>Como fecho ou configuro o widget?</summary>
+          <p>Clique com o botão direito sobre ele: lá estão “Sempre no topo”, opacidade, intervalo de atualização, mostrar discos e “Fechar”.</p>
+        </details>
+      </div>
+    </section>
+
+    <section aria-labelledby="final-titulo">
+      <div class="final-cta glass">
+        <h2 class="section-title" id="final-titulo">Sinta o pulso do seu PC</h2>
+        <p class="section-sub" style="margin: 0 auto 24px;">Grátis, open source e sem instalação.</p>
+        <div class="cta">
+          <button class="btn btn-primary" type="button" data-action="open">Abrir widget no Windows</button>
+          <a class="btn btn-ghost" href="https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe" data-action="download">Baixar Pulso.exe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="row">
+      <span>© 2026 Pulso · por <a href="https://github.com/ferbdev" rel="noopener">ferbdev</a></span>
+      <span>Sensores via <a href="https://github.com/LibreHardwareMonitor/LibreHardwareMonitor" rel="noopener">LibreHardwareMonitor</a> · <a href="https://github.com/ferbdev/pulso" rel="noopener">Código-fonte</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

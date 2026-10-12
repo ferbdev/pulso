@@ -1,0 +1,186 @@
+<Window x:Class="Pulso.Views.WidgetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Pulso.Views.Controls"
+        xmlns:converters="clr-namespace:Pulso.Converters"
+        xmlns:vm="clr-namespace:Pulso.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:WidgetViewModel}"
+        Title="Pulso"
+        Width="270"
+        SizeToContent="Height"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Topmost="{Binding Topmost}"
+        Opacity="{Binding WidgetOpacity}"
+        MouseLeftButtonDown="OnMouseLeftButtonDown">
+
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Sempre no topo" IsCheckable="True" IsChecked="{Binding Topmost}" />
+            <MenuItem Header="Mostrar discos" IsCheckable="True" IsChecked="{Binding ShowDisks}" />
+            <MenuItem Header="Opacidade">
+                <MenuItem Header="100%" Command="{Binding SetOpacityCommand}" CommandParameter="1.0" />
+                <MenuItem Header="90%" Command="{Binding SetOpacityCommand}" CommandParameter="0.9" />
+                <MenuItem Header="80%" Command="{Binding SetOpacityCommand}" CommandParameter="0.8" />
+                <MenuItem Header="70%" Command="{Binding SetOpacityCommand}" CommandParameter="0.7" />
+                <MenuItem Header="60%" Command="{Binding SetOpacityCommand}" CommandParameter="0.6" />
+            </MenuItem>
+            <MenuItem Header="Atualizar a cada">
+                <MenuItem Header="0,5 s" Command="{Binding SetRefreshIntervalCommand}" CommandParameter="500" />
+                <MenuItem Header="1 s" Command="{Binding SetRefreshIntervalCommand}" CommandParameter="1000" />
+                <MenuItem Header="2 s" Command="{Binding SetRefreshIntervalCommand}" CommandParameter="2000" />
+                <MenuItem Header="5 s" Command="{Binding SetRefreshIntervalCommand}" CommandParameter="5000" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Fechar" Click="OnCloseClick" />
+        </ContextMenu>
+    </Window.ContextMenu>
+
+    <Border x:Name="Card"
+            Background="{StaticResource CardBackground}"
+            BorderBrush="{StaticResource CardBorder}"
+            BorderThickness="1"
+            CornerRadius="12"
+            Padding="14,12">
+        <StackPanel>
+
+            <!-- CPU -->
+            <DockPanel>
+                <TextBlock Style="{StaticResource SectionHeader}" Text="CPU" />
+                <TextBlock Style="{StaticResource DeviceName}" Text="{Binding CpuName}" ToolTip="{Binding CpuName}" />
+            </DockPanel>
+            <UniformGrid Columns="3" Margin="0,6,0,2">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BigValue}" Text="{Binding CpuTemperatureText}"
+                               Foreground="{Binding CpuTemperature, Converter={StaticResource ThresholdBrush}, ConverterParameter='60,80'}" />
+                    <TextBlock Style="{StaticResource CaptionText}" Text="Temp." />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BigValue}" Text="{Binding CpuLoadText}" />
+                    <TextBlock Style="{StaticResource CaptionText}" Text="Uso" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BigValue}" FontSize="15" Margin="0,4,0,0" Text="{Binding CpuClockText}" />
+                    <TextBlock Style="{StaticResource CaptionText}" Text="Clock" />
+                </StackPanel>
+            </UniformGrid>
+            <controls:MetricBar Label="Uso" ValueText="{Binding CpuLoadText}" Percent="{Binding CpuLoad}"
+                                BarBrush="{Binding CpuLoad, Converter={StaticResource ThresholdBrush}, ConverterParameter='70,90'}" />
+
+            <!-- GPU -->
+            <StackPanel Margin="0,12,0,0" Visibility="{Binding HasGpu, Converter={StaticResource BoolToVisibility}}">
+                <DockPanel>
+                    <TextBlock Style="{StaticResource SectionHeader}" Text="GPU" />
+                    <TextBlock Style="{StaticResource DeviceName}" Text="{Binding GpuName}" ToolTip="{Binding GpuName}" />
+                </DockPanel>
+                <UniformGrid Columns="3" Margin="0,6,0,2">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource BigValue}" Text="{Binding GpuTemperatureText}"
+                                   Foreground="{Binding GpuTemperature, Converter={StaticResource ThresholdBrush}, ConverterParameter='65,83'}" />
+                        <TextBlock Style="{StaticResource CaptionText}" Text="Temp." />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource BigValue}" Text="{Binding GpuLoadText}" />
+                        <TextBlock Style="{StaticResource CaptionText}" Text="Uso" />
+                    </StackPanel>
+                </UniformGrid>
+                <controls:MetricBar Label="Uso" ValueText="{Binding GpuLoadText}" Percent="{Binding GpuLoad}"
+                                    BarBrush="{Binding GpuLoad, Converter={StaticResource ThresholdBrush}, ConverterParameter='70,90'}" />
+                <controls:MetricBar Label="VRAM" ValueText="{Binding GpuMemoryText}" Percent="{Binding GpuMemoryPercent}"
+                                    BarBrush="{Binding GpuMemoryPercent, Converter={StaticResource ThresholdBrush}, ConverterParameter='75,90'}" />
+            </StackPanel>
+
+            <!-- RAM -->
+            <TextBlock Margin="0,12,0,0" Style="{StaticResource SectionHeader}" Text="MEMÓRIA" />
+            <controls:MetricBar Label="RAM" ValueText="{Binding MemoryText}" Percent="{Binding MemoryPercent}"
+                                BarBrush="{Binding MemoryPercent, Converter={StaticResource ThresholdBrush}, ConverterParameter='75,90'}" />
+
+            <!-- Discos -->
+            <StackPanel Margin="0,12,0,0" Visibility="{Binding IsDiskSectionVisible, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Style="{StaticResource SectionHeader}" Text="DISCOS" />
+                <ItemsControl ItemsSource="{Binding Disks}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:DiskRow}">
+                            <StackPanel Margin="0,3">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Right" Style="{StaticResource ValueText}" Margin="8,0,0,0"
+                                               Text="{Binding TemperatureText}"
+                                               Foreground="{Binding Temperature, Converter={StaticResource ThresholdBrush}, ConverterParameter='50,60'}" />
+                                    <TextBlock DockPanel.Dock="Right" Style="{StaticResource ValueText}" Text="{Binding UsedText}" />
+                                    <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Name}"
+                                               TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" />
+                                </DockPanel>
+                                <ProgressBar Margin="0,4,0,0" Style="{StaticResource ThinBar}" Maximum="100"
+                                             Value="{Binding Percent}"
+                                             Foreground="{Binding Percent, Converter={StaticResource ThresholdBrush}, ConverterParameter='80,90'}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Aviso (ex.: driver ausente) -->
+            <DockPanel Margin="0,10,0,0">
+                <DockPanel.Style>
+                    <Style TargetType="DockPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding StatusMessage}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+                <Button DockPanel.Dock="Right"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        Content="{Binding StatusActionText}"
+                        Command="{Binding FixStatusCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Setter Property="Foreground" Value="#1A1D23" />
+                            <Setter Property="Background" Value="{StaticResource Accent}" />
+                            <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
+                            <Setter Property="FontSize" Value="10" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Chrome" Background="{TemplateBinding Background}" CornerRadius="4" Padding="8,3">
+                                            <ContentPresenter HorizontalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Chrome" Property="Opacity" Value="0.85" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="Chrome" Property="Opacity" Value="0.4" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StatusActionText}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <TextBlock Style="{StaticResource CaptionText}"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Foreground="{x:Static converters:ThresholdBrushConverter.Warning}"
+                           Text="{Binding StatusMessage}" />
+            </DockPanel>
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Pulso/Pulso.csproj" />
+  </Folder>
+</Solution>
