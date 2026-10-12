@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alternativa ao HWMonitor: Pulso, Open Hardware Monitor e LibreHardwareMonitor | Pulso</title>
+  <meta name="description" content="Procurando uma alternativa ao HWMonitor? Comparação honesta entre HWMonitor, Open Hardware Monitor, LibreHardwareMonitor e Pulso: recursos, licença, versão portátil e qual usar em cada caso.">
+  <link rel="canonical" href="https://ferbdev.github.io/pulso/guias/alternativa-hwmonitor/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#eef2f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pulso">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://ferbdev.github.io/pulso/guias/alternativa-hwmonitor/">
+  <meta property="og:title" content="Alternativa ao HWMonitor: comparação de monitores de temperatura">
+  <meta property="og:description" content="HWMonitor, Open Hardware Monitor, LibreHardwareMonitor e Pulso lado a lado.">
+  <meta property="og:image" content="https://ferbdev.github.io/pulso/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../../assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Alternativa ao HWMonitor: Pulso, Open Hardware Monitor e LibreHardwareMonitor",
+    "description": "Comparação entre monitores de temperatura gratuitos para Windows.",
+    "inLanguage": "pt-BR",
+    "datePublished": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "author": { "@type": "Person", "name": "ferbdev", "url": "https://github.com/ferbdev" },
+    "publisher": { "@type": "Organization", "name": "Pulso", "logo": { "@type": "ImageObject", "url": "https://ferbdev.github.io/pulso/assets/og.png" } },
+    "image": "https://ferbdev.github.io/pulso/assets/og.png",
+    "mainEntityOfPage": "https://ferbdev.github.io/pulso/guias/alternativa-hwmonitor/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pulso", "item": "https://ferbdev.github.io/pulso/" },
+      { "@type": "ListItem", "position": 2, "name": "Alternativa ao HWMonitor", "item": "https://ferbdev.github.io/pulso/guias/alternativa-hwmonitor/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <nav class="nav glass" aria-label="Principal">
+    <a class="brand" href="../../" aria-label="Pulso, página inicial">
+      <img src="../../assets/favicon.svg" alt="" width="28" height="28">
+      Pulso
+    </a>
+    <ul class="nav-links">
+      <li class="keep"><a href="../../">Baixar o Pulso</a></li>
+    </ul>
+  </nav>
+
+  <main class="container policy">
+    <article class="glass policy-card">
+      <h1>Alternativa ao HWMonitor</h1>
+      <p>
+        O HWMonitor é o monitor de hardware mais conhecido para Windows, e com razão: é gratuito e mostra praticamente todos os
+        sensores do PC. Mas ele é uma janela com uma lista longa, pensada para diagnóstico. Se o que você quer é ver a
+        temperatura <strong>enquanto usa o computador</strong>, ou prefere um programa de código aberto, vale conhecer as
+        alternativas. Esta comparação foi escrita pelos autores do Pulso, então indicamos também quando o Pulso <em>não</em> é a
+        melhor escolha.
+      </p>
+
+      <h2>Comparação</h2>
+      <div class="compat glass">
+        <table>
+          <caption class="sr-only">Comparação entre monitores de hardware gratuitos para Windows</caption>
+          <thead>
+            <tr><th scope="col"></th><th scope="col">HWMonitor</th><th scope="col">Open Hardware Monitor</th><th scope="col">LibreHardwareMonitor</th><th scope="col">Pulso</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Preço</td><td>Grátis (há versão PRO paga)</td><td>Grátis</td><td>Grátis</td><td>Grátis</td></tr>
+            <tr><td>Código aberto</td><td class="no">Não</td><td class="yes">Sim (MPL-2.0)</td><td class="yes">Sim (MPL-2.0)</td><td class="yes">Sim (MIT)</td></tr>
+            <tr><td>Versão portátil</td><td class="yes">Sim (zip)</td><td class="yes">Sim (zip)</td><td class="yes">Sim (zip)</td><td class="yes">Sim (um único .exe)</td></tr>
+            <tr><td>Temperatura de CPU e GPU</td><td class="yes">Sim</td><td class="yes">Sim</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
+            <tr><td>Voltagens, ventoinhas e consumo</td><td class="yes">Sim</td><td class="yes">Sim</td><td class="yes">Sim</td><td class="no">Não</td></tr>
+            <tr><td>Widget sempre visível</td><td class="no">Não</td><td>Gadget simples</td><td>Gadget simples</td><td class="yes">Sim, é o foco</td></tr>
+            <tr><td>Atualizações</td><td class="yes">Ativo</td><td class="no">Sem atualizações desde 2020</td><td class="yes">Ativo</td><td class="yes">Ativo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Qual escolher</h2>
+      <ul>
+        <li><strong>Para diagnóstico completo</strong> (voltagens, ventoinhas, consumo de energia, mínimos e máximos): <strong>HWMonitor</strong> ou <strong>LibreHardwareMonitor</strong>. São as ferramentas certas para investigar um problema.</li>
+        <li><strong>Para acompanhar a temperatura no dia a dia</strong>, sem abrir janelas: <strong>Pulso</strong>. É um widget pequeno e flutuante, com as informações essenciais (temperatura e uso de CPU, GPU, RAM e discos) e cores que avisam quando algo esquenta.</li>
+        <li><strong>Se você usava o Open Hardware Monitor</strong>: o código dele não recebe atualizações desde 2020, então processadores e placas mais novos podem não ser reconhecidos. O <strong>LibreHardwareMonitor</strong> é a continuação ativa do projeto, e é a biblioteca que o Pulso usa para ler os sensores.</li>
+      </ul>
+
+      <h2>O que o Pulso faz diferente</h2>
+      <ul>
+        <li><strong>Sempre à vista</strong>: fica no canto da tela, por cima das outras janelas se você quiser, com opacidade ajustável.</li>
+        <li><strong>Um único arquivo</strong>: não precisa instalar nem extrair um zip.</li>
+        <li><strong>Driver em um clique</strong>: se faltar o driver para ler a temperatura da CPU, o próprio widget instala.</li>
+        <li><strong>Em português</strong>, gratuito, sem anúncios e sem coleta de dados.</li>
+      </ul>
+      <div class="cta" style="margin: 20px 0 8px;">
+        <a class="btn btn-primary" href="https://github.com/ferbdev/pulso/releases/latest/download/Pulso.exe" data-action="download">Baixar Pulso.exe</a>
+        <a class="btn btn-ghost" href="../../">Conhecer o Pulso</a>
+      </div>
+
+      <p style="margin-top: 28px;">
+        Atualizado em outubro de 2026. HWMonitor é marca da CPUID; Open Hardware Monitor e LibreHardwareMonitor são projetos
+        independentes. As informações de cada programa foram conferidas nos sites oficiais na data da atualização.
+      </p>
+    </article>
+  </main>
+
+  <footer class="container">
+    <div class="row">
+      <span>© 2026 Pulso · <a href="../../">Página inicial</a></span>
+      <span><a href="../temperatura-cpu-windows-11/">Temperatura no Windows 11</a> · <a href="../temperatura-ideal-cpu-gpu/">Temperatura ideal</a></span>
+    </div>
+  </footer>
+
+  <script src="../../assets/app.js" defer></script>
+</body>
+</html>

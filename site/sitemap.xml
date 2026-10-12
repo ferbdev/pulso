@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ferbdev.github.io/pulso/</loc>
+    <lastmod>2026-10-12</lastmod>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ferbdev.github.io/pulso/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ferbdev.github.io/pulso/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ferbdev.github.io/pulso/en/"/>
+    <image:image>
+      <image:loc>https://ferbdev.github.io/pulso/assets/widget.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://ferbdev.github.io/pulso/assets/hero.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://ferbdev.github.io/pulso/en/</loc>
+    <lastmod>2026-10-12</lastmod>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://ferbdev.github.io/pulso/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ferbdev.github.io/pulso/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ferbdev.github.io/pulso/en/"/>
+    <image:image>
+      <image:loc>https://ferbdev.github.io/pulso/assets/widget.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ferbdev.github.io/pulso/guias/temperatura-cpu-windows-11/</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://ferbdev.github.io/pulso/guias/temperatura-ideal-cpu-gpu/</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://ferbdev.github.io/pulso/guias/alternativa-hwmonitor/</loc>
+    <lastmod>2026-10-12</lastmod>
   </url>
   <url>
     <loc>https://ferbdev.github.io/pulso/code-signing/</loc>
+    <lastmod>2026-10-12</lastmod>
   </url>
 </urlset>
