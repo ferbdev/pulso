@@ -182,9 +182,12 @@ public sealed class HardwareMonitorService : IHardwareMonitorService
             gpu.Name,
             Find(sensors, SensorType.Load, "GPU Core", "D3D 3D"),
             Find(sensors, SensorType.Temperature, "GPU Core", "GPU Hot Spot"),
-            Find(sensors, SensorType.SmallData, "GPU Memory Used", "D3D Dedicated Memory Used"),
-            Find(sensors, SensorType.SmallData, "GPU Memory Total"));
+            BytesToMb(Find(sensors, SensorType.Data, "GPU Memory Used", "D3D Dedicated Memory Used")),
+            BytesToMb(Find(sensors, SensorType.Data, "GPU Memory Total", "D3D Dedicated Memory Total")));
     }
+
+    // Desde a 0.9.7, os sensores de memória (SensorType.Data) vêm em bytes.
+    private static double? BytesToMb(double? bytes) => bytes / (1024d * 1024d);
 
     private static DiskInfo ReadDisk(IHardware disk)
     {
