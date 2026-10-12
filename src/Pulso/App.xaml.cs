@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using Pulso.Services;
@@ -12,6 +13,7 @@ public partial class App : Application
 {
     private const string SingleInstanceMutexName = @"Local\Pulso.SingleInstance";
     private const string WaitForPreviousArg = "--wait-for-previous";
+    private const string ReportArg = "--report";
 
     private Mutex? _singleInstanceMutex;
     private HardwareMonitorService? _monitor;
@@ -28,6 +30,12 @@ public partial class App : Application
             return;
         }
 #endif
+
+        if (e.Args.Contains(ReportArg))
+        {
+            _ = WriteReportAsync();
+            return;
+        }
 
         if (!AcquireSingleInstance(waitForPrevious: e.Args.Contains(WaitForPreviousArg)))
         {
@@ -104,6 +112,39 @@ public partial class App : Application
 
         MainWindow?.Close();
         return true;
+    }
+
+    /// <summary>
+    /// <c>Pulso.exe --report</c>: grava todos os sensores detectados em %AppData%\Pulso\report.txt,
+    /// abre o arquivo e encerra. Serve para diagnosticar leituras erradas em outras máquinas.
+    /// </summary>
+    private async Task WriteReportAsync()
+    {
+        ShutdownMode = ShutdownMode.OnExplicitShutdown;
+        try
+        {
+            using var monitor = new HardwareMonitorService();
+            var report = await Task.Run(() =>
+            {
+                monitor.Open();
+                monitor.GetSnapshot(); // primeira leitura popula os sensores
+                Thread.Sleep(1000);
+                return monitor.GetReport();
+            });
+
+            Directory.CreateDirectory(AppPaths.DataDirectory);
+            var path = Path.Combine(AppPaths.DataDirectory, "report.txt");
+            await File.WriteAllTextAsync(path, $"Pulso {typeof(App).Assembly.GetName().Version}{Environment.NewLine}{report}");
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch (Exception ex)
+        {
+            AppPaths.LogError(ex);
+        }
+        finally
+        {
+            Shutdown();
+        }
     }
 
     private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
